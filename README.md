@@ -269,7 +269,7 @@ som vores `SensorHandler` kunne tilgå. Dette er med til at gøre programmet sim
 **Et forslag vi accepterede**
 
 Agenten insisterede på at vi brugte `Locale.US` når værdierne i klienten formateres. Agenten forklarede at vores maskiner 
-kører dansk local tid. Så `String.format("%.1f", 27.4` giver `27,4` og ville herefter kaste en
+kører dansk locale. Så `String.format("%.1f", 27.4)` giver `27,4` og ville herefter kaste en
 NumberFormatException pga Double.parseDouble vores Protokol har derfor dette men ikke i konsol output da vi gerne vil have dansk format
 
 **Forslag vi afviste eller ændrede**
@@ -282,5 +282,5 @@ vi lavede derefter et tjek som sikre at alle sensorer bliver brugt.
 **Hvordan vi testede den AI-genererede kode**
 
 Vi bad agenten om at lave en plan over hvordan den ville lave programmet. Den lavede en 8 trins plan.
-Vi sikrede at vi efter hvert trin testede manuelt om den havde lavet det rigtigt og bad den forklarer i grundige tegn
+Vi sikrede at vi efter hvert trin testede manuelt om den havde lavet det rigtigt og bad den forklarer i grundige træk
 hvordan den selv lavede kvalitets sikring efter hver gang.
