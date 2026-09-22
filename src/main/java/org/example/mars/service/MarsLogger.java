@@ -28,6 +28,7 @@ public class MarsLogger {
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private final BufferedWriter writer;
+    private final String fileName;
 
     /**
      * Opens mars.log in append mode, so previous missions are not overwritten.
@@ -35,7 +36,16 @@ public class MarsLogger {
      * that logging is impossible before it starts accepting sensors.
      */
     public MarsLogger() throws IOException {
-        this.writer = new BufferedWriter(new FileWriter(LOG_FILE, true));
+        this(LOG_FILE);
+    }
+
+    /**
+     * Logs to another file than mars.log. Used by the unit tests, so they can
+     * write to a temporary file instead of the real mission log.
+     */
+    public MarsLogger(String fileName) throws IOException {
+        this.fileName = fileName;
+        this.writer = new BufferedWriter(new FileWriter(fileName, true));
     }
 
     /** Logs a reading that is within the safe range. */
@@ -70,7 +80,7 @@ public class MarsLogger {
             writer.newLine();
             writer.flush();
         } catch (IOException e) {
-            System.out.println("[ERROR] Could not write to " + LOG_FILE + ": " + e.getMessage());
+            System.out.println("[ERROR] Could not write to " + fileName + ": " + e.getMessage());
         }
     }
 
@@ -79,7 +89,7 @@ public class MarsLogger {
         try {
             writer.close();
         } catch (IOException e) {
-            System.out.println("[ERROR] Could not close " + LOG_FILE + ": " + e.getMessage());
+            System.out.println("[ERROR] Could not close " + fileName + ": " + e.getMessage());
         }
     }
 }
